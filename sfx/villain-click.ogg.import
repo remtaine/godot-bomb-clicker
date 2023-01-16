@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/villain-click.ogg-9c11cd6acc56f7eb117746bf78cd4267.oggstr"
+
+[deps]
+
+source_file="res://sfx/villain-click.ogg"
+dest_files=[ "res://.import/villain-click.ogg-9c11cd6acc56f7eb117746bf78cd4267.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

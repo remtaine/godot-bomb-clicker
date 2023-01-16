@@ -1,0 +1,293 @@
+[gd_scene load_steps=28 format=2]
+
+[ext_resource path="res://images/bomb/fakebomb.png" type="Texture" id=1]
+[ext_resource path="res://fonts/ChevyRay - Love Bug 09.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://images/villain/skill4.png" type="Texture" id=3]
+[ext_resource path="res://images/villain/skill3.png" type="Texture" id=4]
+[ext_resource path="res://images/villain/skill2.png" type="Texture" id=5]
+[ext_resource path="res://src/characters/Player.tscn" type="PackedScene" id=6]
+[ext_resource path="res://src/ui/Timer.gd" type="Script" id=7]
+[ext_resource path="res://sfx/explosion.ogg" type="AudioStream" id=8]
+[ext_resource path="res://src/characters/Bomb.gd" type="Script" id=9]
+[ext_resource path="res://src/levels/Level.gd" type="Script" id=10]
+[ext_resource path="res://src/ui/Skill.tscn" type="PackedScene" id=11]
+[ext_resource path="res://images/patterns/pattern_0012.png" type="Texture" id=12]
+[ext_resource path="res://images/patterns/White_Circle.svg" type="Texture" id=13]
+[ext_resource path="res://music/stage-theme-01.ogg" type="AudioStream" id=14]
+[ext_resource path="res://src/sounds/Sfx.gd" type="Script" id=15]
+
+[sub_resource type="DynamicFont" id=2]
+size = 45
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFontData" id=5]
+antialiased = false
+font_path = "res://fonts/ChevyRay - Love Bug 09.ttf"
+
+[sub_resource type="DynamicFont" id=6]
+size = 64
+font_data = SubResource( 5 )
+
+[sub_resource type="InputEventKey" id=7]
+scancode = 49
+
+[sub_resource type="ShortCut" id=8]
+shortcut = SubResource( 7 )
+
+[sub_resource type="InputEventKey" id=9]
+scancode = 50
+
+[sub_resource type="ShortCut" id=10]
+shortcut = SubResource( 9 )
+
+[sub_resource type="InputEventKey" id=11]
+scancode = 51
+
+[sub_resource type="ShortCut" id=12]
+shortcut = SubResource( 11 )
+
+[sub_resource type="InputEventKey" id=13]
+scancode = 52
+
+[sub_resource type="ShortCut" id=14]
+shortcut = SubResource( 13 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 54
+font_data = SubResource( 5 )
+
+[node name="Level" type="Node"]
+script = ExtResource( 10 )
+
+[node name="Background" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color( 0.733333, 0.733333, 0.733333, 1 )
+
+[node name="GameBackground" type="ColorRect" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -1420.0
+mouse_filter = 2
+color = Color( 0.733333, 0.733333, 0.733333, 1 )
+
+[node name="Floor" type="ColorRect" parent="GameBackground"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -450.0
+rect_min_size = Vector2( 0, 450 )
+mouse_filter = 2
+color = Color( 0.533333, 0.533333, 0.533333, 1 )
+
+[node name="Shadow" type="TextureRect" parent="GameBackground"]
+visible = false
+self_modulate = Color( 0, 0, 0, 0.329412 )
+margin_left = 579.0
+margin_top = 666.62
+margin_right = 1179.0
+margin_bottom = 1266.62
+rect_scale = Vector2( 0.45, 0.1 )
+texture = ExtResource( 13 )
+
+[node name="Player" parent="GameBackground" instance=ExtResource( 6 )]
+margin_left = -163.5
+margin_top = -168.0
+margin_right = 163.5
+margin_bottom = 168.001
+
+[node name="Bomb" type="TextureRect" parent="GameBackground"]
+margin_left = 1082.0
+margin_top = 422.0
+margin_right = 1382.0
+margin_bottom = 722.0
+texture = ExtResource( 1 )
+expand = true
+script = ExtResource( 9 )
+
+[node name="Health" type="Label" parent="GameBackground/Bomb"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -70.0
+margin_top = -72.0
+margin_right = 70.0
+margin_bottom = -27.0
+custom_fonts/font = SubResource( 2 )
+text = "1000"
+align = 1
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="UI" type="Control" parent="CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="Left" type="ColorRect" parent="CanvasLayer/UI"]
+anchor_bottom = 1.0
+margin_right = 500.0
+color = Color( 0.352941, 0.188235, 0.54902, 1 )
+
+[node name="Shadow" type="ColorRect" parent="CanvasLayer/UI/Left"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_right = 10.0
+color = Color( 0.223529, 0.101961, 0.372549, 1 )
+
+[node name="Pattern" type="TextureRect" parent="CanvasLayer/UI/Left"]
+self_modulate = Color( 0, 0, 0, 0.0901961 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 12 )
+expand = true
+stretch_mode = 2
+
+[node name="Title" type="Label" parent="CanvasLayer/UI/Left"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -145.0
+margin_top = 49.0
+margin_right = 145.0
+margin_bottom = 139.0
+custom_fonts/font = SubResource( 6 )
+text = "Skills"
+align = 1
+
+[node name="Skill1" parent="CanvasLayer/UI/Left" instance=ExtResource( 11 )]
+margin_left = 25.0
+margin_top = 138.0
+margin_right = 475.0
+margin_bottom = 318.0
+shortcut = SubResource( 8 )
+
+[node name="Skill2" parent="CanvasLayer/UI/Left" instance=ExtResource( 11 )]
+margin_left = 25.0
+margin_top = 338.0
+margin_right = 475.0
+margin_bottom = 518.0
+shortcut = SubResource( 10 )
+added_value = 5
+skill_num = 2
+cost = 20
+
+[node name="Icon" parent="CanvasLayer/UI/Left/Skill2" index="0"]
+texture = ExtResource( 5 )
+
+[node name="HBoxContainer2" parent="CanvasLayer/UI/Left/Skill2/VBoxContainer" index="0"]
+margin_right = 250.0
+
+[node name="Title" parent="CanvasLayer/UI/Left/Skill2/VBoxContainer/HBoxContainer2" index="0"]
+margin_right = 216.0
+text = "Lucky Strike"
+
+[node name="Shortcut" parent="CanvasLayer/UI/Left/Skill2/VBoxContainer/HBoxContainer2" index="1"]
+margin_left = 220.0
+margin_right = 250.0
+text = "[2]"
+
+[node name="Description" parent="CanvasLayer/UI/Left/Skill2/VBoxContainer" index="1"]
+margin_right = 250.0
+text = "+XXX% to x2 on click
+(currently +YYY%)"
+
+[node name="HBoxContainer" parent="CanvasLayer/UI/Left/Skill2/VBoxContainer" index="2"]
+margin_right = 250.0
+
+[node name="Cost" parent="CanvasLayer/UI/Left/Skill2/VBoxContainer/HBoxContainer" index="1"]
+margin_right = 250.0
+
+[node name="Skill3" parent="CanvasLayer/UI/Left" instance=ExtResource( 11 )]
+margin_left = 25.0
+margin_top = 538.0
+margin_right = 475.0
+margin_bottom = 718.0
+shortcut = SubResource( 12 )
+added_value = 5
+skill_num = 3
+cost = 30
+
+[node name="Icon" parent="CanvasLayer/UI/Left/Skill3" index="0"]
+texture = ExtResource( 4 )
+
+[node name="Title" parent="CanvasLayer/UI/Left/Skill3/VBoxContainer/HBoxContainer2" index="0"]
+margin_right = 159.0
+text = "Wine Time"
+
+[node name="Shortcut" parent="CanvasLayer/UI/Left/Skill3/VBoxContainer/HBoxContainer2" index="1"]
+margin_left = 163.0
+text = "[3]"
+
+[node name="Description" parent="CanvasLayer/UI/Left/Skill3/VBoxContainer" index="1"]
+text = "+XXX to timer
+(currently +YYY)"
+
+[node name="Skill4" parent="CanvasLayer/UI/Left" instance=ExtResource( 11 )]
+margin_left = 25.0
+margin_top = 738.0
+margin_right = 475.0
+margin_bottom = 918.0
+shortcut = SubResource( 14 )
+skill_num = 4
+cost = 50
+
+[node name="Icon" parent="CanvasLayer/UI/Left/Skill4" index="0"]
+texture = ExtResource( 3 )
+
+[node name="Title" parent="CanvasLayer/UI/Left/Skill4/VBoxContainer/HBoxContainer2" index="0"]
+margin_right = 144.0
+text = "Ambition"
+
+[node name="Shortcut" parent="CanvasLayer/UI/Left/Skill4/VBoxContainer/HBoxContainer2" index="1"]
+margin_left = 148.0
+text = "[4]"
+
+[node name="Description" parent="CanvasLayer/UI/Left/Skill4/VBoxContainer" index="1"]
+margin_bottom = 115.0
+text = "+XXX underling to click
+(currently +YYY)"
+
+[node name="HBoxContainer" parent="CanvasLayer/UI/Left/Skill4/VBoxContainer" index="2"]
+margin_top = 143.0
+margin_bottom = 161.0
+
+[node name="TimerLabel" type="Label" parent="CanvasLayer/UI/Left"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -140.0
+margin_top = -126.0
+margin_right = 140.0
+margin_bottom = 21.0
+custom_fonts/font = SubResource( 4 )
+text = "Timer:
+60"
+align = 1
+script = ExtResource( 7 )
+
+[node name="Timer" type="Timer" parent="CanvasLayer/UI/Left/TimerLabel"]
+wait_time = 31.0
+one_shot = true
+autostart = true
+
+[node name="Explosion" type="AudioStreamPlayer" parent="CanvasLayer/UI/Left/TimerLabel"]
+stream = ExtResource( 8 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 960, 540 )
+
+[node name="Sfx" type="Node" parent="."]
+script = ExtResource( 15 )
+
+[node name="Music" type="AudioStreamPlayer" parent="Sfx"]
+stream = ExtResource( 14 )
+autoplay = true
+
+[editable path="CanvasLayer/UI/Left/Skill1"]
+[editable path="CanvasLayer/UI/Left/Skill2"]
+[editable path="CanvasLayer/UI/Left/Skill3"]
+[editable path="CanvasLayer/UI/Left/Skill4"]
